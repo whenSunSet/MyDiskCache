@@ -12,7 +12,6 @@ import android.widget.Toast;
 import com.example.heshixiyang.mydiskcache.binaryResource.BinaryResource;
 import com.example.heshixiyang.mydiskcache.cacheEventAndListenner.CacheEvent;
 import com.example.heshixiyang.mydiskcache.cacheEventAndListenner.CacheEventListener;
-import com.example.heshixiyang.mydiskcache.cacheEventAndListenner.NoOpCacheErrorLogger;
 import com.example.heshixiyang.mydiskcache.cacheKey.SimpleCacheKey;
 import com.example.heshixiyang.mydiskcache.core.DefaultDiskStorage;
 import com.example.heshixiyang.mydiskcache.core.DiskCacheConfig;
@@ -79,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         buttonGetCache.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getCache(imageView);
+                getCache();
             }
         });
     }
@@ -87,8 +86,11 @@ public class MainActivity extends AppCompatActivity {
     private void initDiskCache(){
 
         DiskCacheConfig diskCacheConfig=DiskCacheConfig.newBuilder(this).build();
-
-        DefaultDiskStorage defaultDiskStorage=new DefaultDiskStorage(diskCacheConfig.getBaseDirectoryPathSupplier().get(),1,new NoOpCacheErrorLogger());
+        Toast.makeText(this, "缓存文件夹："+diskCacheConfig.getBaseDirectoryPathSupplier().get().getPath(), Toast.LENGTH_SHORT).show();
+        DefaultDiskStorage defaultDiskStorage=new DefaultDiskStorage(
+                diskCacheConfig.getBaseDirectoryPathSupplier().get(),
+                diskCacheConfig.getVersion(),
+                diskCacheConfig.getCacheErrorLogger());
 
         DiskStorageCache.Params params = new DiskStorageCache.Params(
                 diskCacheConfig.getMinimumSizeLimit(),
@@ -179,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void getCache(ImageView imageView){
+    private void getCache(){
         BinaryResource diskCacheResource = mFileCache.getResource(new SimpleCacheKey("2"));
         if (diskCacheResource==null) Toast.makeText(this, "miss 2", Toast.LENGTH_SHORT).show();
         else {
