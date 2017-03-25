@@ -1,0 +1,2 @@
+这里包的用处：但我们插入或者取出一个文件缓存的时候就会用到CacheKey，SimpleCacheKey的内部其实就是一个String，MultiCacheKey的内部只是一系列
+CacheKey的集合。我们一般使用的是SimpleCacheKey，因为我们去网络加载图片的时候Uri就是一个最好的key。

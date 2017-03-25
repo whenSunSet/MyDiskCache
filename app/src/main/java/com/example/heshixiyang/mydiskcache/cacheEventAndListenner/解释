@@ -1,0 +1,7 @@
+这个包的用处：在硬盘缓存的过程中，会有许多的事件发生，比如查找缓存时候命中了、要插入一个缓存、读取缓存失败了等等。
+此时客户端会需要一个监听器来监听各种硬盘缓存事件的发生。此时CacheEventListener接口就可以当客户端对硬盘缓存的监听器，
+CacheEventListener中的每个方法中都传入了一个CacheEvent。CacheEvent是一个接口，其实现类中包裹了许多与硬盘缓存相关的东西，
+SettableCacheEvent就是CacheEvent的唯一实现类，由于硬盘缓存事件产生的很频繁，
+所以SettableCacheEvent使用了享元模式(在内存中只维持两个对象，不断的回收重用)。
+CacheErrorLogger接口是硬盘缓存的读或写产生异常的时候使用到的类。
+CacheEventListener和CacheErrorLogger都只有一个空实现用来填充代码，具体的实现需要使用者实现。

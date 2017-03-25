@@ -1,0 +1,2 @@
+这里FileTree负责遍历一个目录下的所有文件和提供一个安全的删除文件夹方式，其遍历的时候将每个文件交与FileTreeVisitor进行处理。
+由于硬盘缓存使用的是文件系统，所以这是一个很好的访问文件系统的方式。FileTreeVisitor在DiskStorageCache中有两个具体实现。
