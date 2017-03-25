@@ -1,0 +1,3 @@
+# MyDiskCache
+> 硬盘缓存是android图片框架中比较重要的一个模块，Fresco中自己重写了一个硬盘缓存框架，代替了android本身的DiskLruCache，
+这就是我将Fresco的硬盘缓存框架提取出来的demo，建议配合博客一起食用。
